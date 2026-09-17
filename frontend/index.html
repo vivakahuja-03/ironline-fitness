@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IronLine Fitness — Train with purpose</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">Iron<span>Line</span></a>
+    <div style="display:flex; align-items:center; gap:0.6rem;">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">&#127769;</button>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">&#9776;</button>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="trainers.html">Trainers</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="bmi.html">BMI</a></li>
+      <li><a href="favorites.html">Favorites</a></li>
+      <li><a href="bookings.html">Bookings</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <p class="hero-kicker">Karachi's training floor for real progress</p>
+      <h1>Build strength that lasts.</h1>
+      <p class="hero-copy">Structured programs, certified trainers, and a floor built for
+        beginners and competitors alike. Pick a program, book a session, and show up —
+        we'll handle the plan.</p>
+      <div class="hero-actions">
+        <a class="btn" href="programs.html">Browse programs</a>
+        <a class="btn btn-outline" href="membership.html">See membership</a>
+      </div>
+    </div>
+    <div class="hero-stat">
+      <span class="num">12+</span>
+      <span class="label">Programs across strength, cardio, yoga and HIIT</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Why train here</h2>
+    </div>
+    <div class="card-grid">
+      <article class="card">
+        <span class="card-tag">Programs</span>
+        <h3>Structured, not random</h3>
+        <p>Every program has a clear category, difficulty level, and duration —
+          so you always know what you're walking into.</p>
+      </article>
+      <article class="card">
+        <span class="card-tag">Trainers</span>
+        <h3>Real specialists</h3>
+        <p>Book time directly with a strength, cardio, or yoga specialist —
+          not a generalist working off a template.</p>
+      </article>
+      <article class="card">
+        <span class="card-tag">Tools</span>
+        <h3>Know your numbers</h3>
+        <p>Use our BMI calculator to check in on your baseline before you pick a plan.</p>
+        <div class="card-actions">
+          <a class="btn btn-outline" href="bmi.html">Try the calculator</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <h2>What our members say</h2>
+    </div>
+    <div class="card-grid" id="testimonialGrid"></div>
+  </div>
+</section>
+
+<section class="section section-dark">
+  <div class="container text-center">
+    <h2>Ready to book your first session?</h2>
+    <p style="margin:0 auto 1.5rem;">Pick a program or a trainer, choose a time that works, and manage
+      everything from your bookings page — no account required, just your email.</p>
+    <a class="btn" href="programs.html">Get started</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 IronLine Fitness.</p>
+    <p><a href="contact.html">Contact us</a> &middot; <a href="admin.html">Admin</a></p>
+  </div>
+</footer>
+
+<script src="js/components.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>

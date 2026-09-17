@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin — IronLine Fitness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">Iron<span>Line</span></a>
+    <div style="display:flex; align-items:center; gap:0.6rem;">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">&#127769;</button>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">&#9776;</button>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="trainers.html">Trainers</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="bmi.html">BMI</a></li>
+      <li><a href="favorites.html">Favorites</a></li>
+      <li><a href="bookings.html">Bookings</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="section">
+  <div class="container">
+
+    <div class="admin-gate" id="adminGate">
+      <h2>Admin access</h2>
+      <p>Enter the admin key set in the backend's <code>.env</code> file.</p>
+      <div class="field">
+        <label for="adminKeyInput">Admin key</label>
+        <input type="password" id="adminKeyInput" />
+      </div>
+      <button class="btn btn-block" id="unlockBtn">Unlock dashboard</button>
+      <p class="error-msg" id="gateError"></p>
+    </div>
+
+    <div id="adminDashboard" style="display:none;">
+      <div class="section-head">
+        <div>
+          <h2>Admin dashboard</h2>
+          <p>Manage workout programs and trainers. Changes are saved to the database immediately.</p>
+        </div>
+        <button class="btn btn-outline" id="lockBtn">Lock</button>
+      </div>
+
+      <div class="admin-tabs">
+        <button class="chip" data-tab="programs" aria-pressed="true">Programs</button>
+        <button class="chip" data-tab="trainers" aria-pressed="false">Trainers</button>
+      </div>
+
+      <div id="programsTab">
+        <button class="btn" id="addProgramBtn" type="button">+ Add program</button>
+
+        <form class="admin-form" id="programForm">
+          <input type="hidden" id="programId" />
+          <div class="form-grid">
+            <div class="field"><label for="programName">Name</label><input id="programName" required minlength="2" /></div>
+            <div class="field"><label for="programCategory">Category</label>
+              <select id="programCategory">
+                <option>Strength</option><option>Cardio</option><option>Yoga</option><option>HIIT</option>
+              </select>
+            </div>
+            <div class="field"><label for="programDifficulty">Difficulty</label>
+              <select id="programDifficulty">
+                <option>Beginner</option><option>Intermediate</option><option>Advanced</option>
+              </select>
+            </div>
+            <div class="field"><label for="programDuration">Duration (minutes)</label><input type="number" id="programDuration" min="1" max="300" required /></div>
+            <div class="field"><label for="programDescription">Description</label><textarea id="programDescription"></textarea></div>
+          </div>
+          <button class="btn" type="submit">Save program</button>
+          <button class="btn btn-outline" type="button" id="cancelProgramForm">Cancel</button>
+          <p class="error-msg" id="programFormError"></p>
+        </form>
+
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Name</th><th>Category</th><th>Difficulty</th><th>Duration</th><th>Actions</th></tr></thead>
+            <tbody id="programsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="trainersTab" style="display:none;">
+        <button class="btn" id="addTrainerBtn" type="button">+ Add trainer</button>
+
+        <form class="admin-form" id="trainerForm">
+          <input type="hidden" id="trainerId" />
+          <div class="form-grid">
+            <div class="field"><label for="trainerName">Name</label><input id="trainerName" required minlength="2" /></div>
+            <div class="field"><label for="trainerSpecialty">Specialty</label>
+              <select id="trainerSpecialty">
+                <option>Strength</option><option>Cardio</option><option>Yoga</option>
+              </select>
+            </div>
+            <div class="field"><label for="trainerExperience">Years of experience</label><input type="number" id="trainerExperience" min="0" max="60" required /></div>
+            <div class="field"><label for="trainerBio">Bio</label><textarea id="trainerBio"></textarea></div>
+          </div>
+          <button class="btn" type="submit">Save trainer</button>
+          <button class="btn btn-outline" type="button" id="cancelTrainerForm">Cancel</button>
+          <p class="error-msg" id="trainerFormError"></p>
+        </form>
+
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Name</th><th>Specialty</th><th>Experience</th><th>Actions</th></tr></thead>
+            <tbody id="trainersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 IronLine Fitness.</p>
+    <p><a href="contact.html">Contact us</a></p>
+  </div>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/api.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

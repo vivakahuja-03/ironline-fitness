@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Payment successful — IronLine Fitness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">Iron<span>Line</span></a>
+  </nav>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div id="resultBox" class="payment-result">
+      <p>Confirming your payment…</p>
+    </div>
+  </div>
+</section>
+
+<script src="js/storage.js"></script>
+<script src="js/api.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const box = document.getElementById("resultBox");
+    const sessionId = new URLSearchParams(window.location.search).get("payment_id");
+
+    if (!sessionId) {
+      box.innerHTML = "<h2>Missing payment reference</h2><p>We couldn't find a payment ID in the URL.</p>";
+      return;
+    }
+
+    api
+      .getPayment(sessionId)
+      .then((payment) => {
+        if (payment.status === "paid") {
+          box.innerHTML = `
+            <h2>You're in! 🎉</h2>
+            <p>Your payment of Rs ${payment.amount.toLocaleString("en-PK", {maximumFractionDigits: 0})} for the ${payment.plan_name} plan is confirmed.</p>
+            <p>You'll get a confirmation email if email notifications are enabled on this deployment.</p>
+            <a class="btn" href="index.html">Back to home</a>
+          `;
+        } else {
+          box.innerHTML = `
+            <h2>Payment not confirmed yet</h2>
+            <p>Current status: ${payment.status}. If you just completed payment, refresh this page in a moment.</p>
+          `;
+        }
+      })
+      .catch((err) => {
+        box.innerHTML = `<h2>Couldn't verify payment</h2><p>${err.message}</p>`;
+      });
+  });
+</script>
+</body>
+</html>

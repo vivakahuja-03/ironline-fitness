@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trainers — IronLine Fitness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">Iron<span>Line</span></a>
+    <div style="display:flex; align-items:center; gap:0.6rem;">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">&#127769;</button>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">&#9776;</button>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="trainers.html">Trainers</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="bmi.html">BMI</a></li>
+      <li><a href="favorites.html">Favorites</a></li>
+      <li><a href="bookings.html">Bookings</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2>Trainers</h2>
+        <p>Filter by specialty to find the right coach.</p>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <input type="search" id="searchInput" placeholder="Search trainers…" aria-label="Search trainers" />
+      <button class="chip" data-specialty="" aria-pressed="true">All</button>
+      <button class="chip" data-specialty="Strength" aria-pressed="false">Strength</button>
+      <button class="chip" data-specialty="Cardio" aria-pressed="false">Cardio</button>
+      <button class="chip" data-specialty="Yoga" aria-pressed="false">Yoga</button>
+    </div>
+
+    <div id="trainerGrid" class="card-grid" aria-live="polite">
+      <p class="empty-state">Loading trainers…</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; 2026 IronLine Fitness.</p>
+    <p><a href="contact.html">Contact us</a> &middot; <a href="admin.html">Admin</a></p>
+  </div>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/api.js"></script>
+<script src="js/components.js"></script>
+<script src="js/favorites.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/trainers.js"></script>
+</body>
+</html>
