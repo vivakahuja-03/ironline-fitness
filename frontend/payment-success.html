@@ -38,9 +38,15 @@
 
     api
       .getPayment(sessionId)
-      .then((payment) => {
+      .then(async (payment) => {
+        const isLive = await isBackendAvailable();
+        const disclosure = isLive
+          ? ""
+          : `<p class="demo-banner">⚠️ Demo mode: no payment gateway is connected on this deployment. This transaction was simulated locally and no real money moved.</p>`;
+
         if (payment.status === "paid") {
           box.innerHTML = `
+            ${disclosure}
             <h2>You're in! 🎉</h2>
             <p>Your payment of Rs ${payment.amount.toLocaleString("en-PK", {maximumFractionDigits: 0})} for the ${payment.plan_name} plan is confirmed.</p>
             <p>You'll get a confirmation email if email notifications are enabled on this deployment.</p>
@@ -48,6 +54,7 @@
           `;
         } else {
           box.innerHTML = `
+            ${disclosure}
             <h2>Payment not confirmed yet</h2>
             <p>Current status: ${payment.status}. If you just completed payment, refresh this page in a moment.</p>
           `;

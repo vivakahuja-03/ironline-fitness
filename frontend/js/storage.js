@@ -209,6 +209,10 @@ const storage = {
     );
   },
 
+  getAllBookings() {
+    return readCollection("bookings");
+  },
+
   updateBooking(id, updates) {
     const list = readCollection("bookings");
     const idx = list.findIndex((b) => Number(b.id) === Number(id));

@@ -36,7 +36,7 @@
 
     <div class="admin-gate" id="adminGate">
       <h2>Admin access</h2>
-      <p>Enter the admin key set in the backend's <code>.env</code> file.</p>
+      <p>Enter the admin key. In Local Storage mode (no backend running) it's <code>admin123</code>; if the backend is connected, use the key from its <code>.env</code> file instead.</p>
       <div class="field">
         <label for="adminKeyInput">Admin key</label>
         <input type="password" id="adminKeyInput" />
@@ -57,6 +57,7 @@
       <div class="admin-tabs">
         <button class="chip" data-tab="programs" aria-pressed="true">Programs</button>
         <button class="chip" data-tab="trainers" aria-pressed="false">Trainers</button>
+        <button class="chip" data-tab="bookings" aria-pressed="false">Bookings</button>
       </div>
 
       <div id="programsTab">
@@ -116,6 +117,16 @@
           <table class="admin-table">
             <thead><tr><th>Name</th><th>Specialty</th><th>Experience</th><th>Actions</th></tr></thead>
             <tbody id="trainersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="bookingsTab" style="display:none;">
+        <p>Confirm or cancel bookings customers made from the public Bookings page.</p>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Customer</th><th>For</th><th>Date &amp; time</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="bookingsTableBody"></tbody>
           </table>
         </div>
       </div>

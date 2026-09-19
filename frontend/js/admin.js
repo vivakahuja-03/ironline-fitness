@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
       tab.setAttribute("aria-pressed", "true");
       document.getElementById("programsTab").style.display = tab.dataset.tab === "programs" ? "block" : "none";
       document.getElementById("trainersTab").style.display = tab.dataset.tab === "trainers" ? "block" : "none";
+      document.getElementById("bookingsTab").style.display = tab.dataset.tab === "bookings" ? "block" : "none";
+      if (tab.dataset.tab === "bookings") loadBookings();
     });
   });
 
@@ -238,6 +240,66 @@ document.addEventListener("DOMContentLoaded", () => {
       loadTrainers();
     } catch (err) {
       handleAuthError(err, trainerFormError);
+    }
+  });
+
+  // ---- Bookings: confirm or cancel what customers submitted ----
+
+  const bookingsTableBody = document.getElementById("bookingsTableBody");
+  let bookingsCache = [];
+
+  function bookingAdminRow(b) {
+    const target = b.program_id ? `Program #${b.program_id}` : b.trainer_id ? `Trainer #${b.trainer_id}` : "Session";
+    const canAct = b.status === "pending";
+    return `
+      <tr data-id="${b.id}">
+        <td>${b.name}<br><small>${b.email}</small></td>
+        <td>${target}</td>
+        <td>${b.preferred_date} at ${b.preferred_time}</td>
+        <td><span class="status-pill status-${b.status}">${b.status}</span></td>
+        <td class="admin-actions">
+          ${canAct ? `<button class="btn btn-sm" data-action="confirm-booking">Confirm</button>` : ""}
+          ${canAct ? `<button class="btn btn-outline btn-sm" data-action="cancel-booking">Cancel</button>` : ""}
+          ${!canAct ? "—" : ""}
+        </td>
+      </tr>
+    `;
+  }
+
+  async function loadBookings() {
+    try {
+      bookingsCache = await api.getAllBookings(getAdminKey());
+      bookingsTableBody.innerHTML = bookingsCache.length
+        ? bookingsCache.map(bookingAdminRow).join("")
+        : `<tr><td colspan="5">No bookings yet.</td></tr>`;
+    } catch (err) {
+      bookingsTableBody.innerHTML = `<tr><td colspan="5">${err.message}</td></tr>`;
+    }
+  }
+
+  bookingsTableBody.addEventListener("click", async (e) => {
+    const btn = e.target.closest("button[data-action]");
+    if (!btn) return;
+    const row = btn.closest("tr");
+    const id = Number(row.dataset.id);
+
+    if (btn.dataset.action === "confirm-booking") {
+      try {
+        await api.updateBooking(id, { status: "confirmed" });
+        loadBookings();
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    if (btn.dataset.action === "cancel-booking") {
+      if (!confirm("Cancel this booking?")) return;
+      try {
+        await api.updateBooking(id, { status: "cancelled" });
+        loadBookings();
+      } catch (err) {
+        alert(err.message);
+      }
     }
   });
 });

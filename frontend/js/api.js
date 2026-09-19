@@ -96,6 +96,12 @@ const api = {
       () => storage.getBookingsByEmail(email)
     ),
 
+  getAllBookings: (key) =>
+    withFallback(
+      () => apiRequest("/api/admin/bookings", {}, key),
+      () => storage.getAllBookings()
+    ),
+
   updateBooking: (id, data) =>
     withFallback(
       () => apiRequest(`/api/bookings/${id}`, { method: "PUT", body: JSON.stringify(data) }),

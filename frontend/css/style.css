@@ -729,3 +729,14 @@ textarea:focus-visible {
   border-radius: var(--radius);
   background: var(--surface);
 }
+
+.demo-banner {
+  background: #fff3cd;
+  color: #664d03;
+  border: 1px solid #ffe69c;
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+  text-align: left;
+}

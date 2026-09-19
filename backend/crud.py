@@ -103,6 +103,8 @@ def get_bookings_by_email(db: Session, email: str):
         .all()
     )
 
+def get_all_bookings(db: Session):
+    return db.query(models.Booking).order_by(models.Booking.created_at.desc()).all()
 
 def get_booking(db: Session, booking_id: int):
     return db.query(models.Booking).filter(models.Booking.id == booking_id).first()

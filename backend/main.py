@@ -112,6 +112,9 @@ def create_booking(booking: schemas.BookingCreate, background_tasks: BackgroundT
 def read_bookings(email: str, db: Session = Depends(get_db)):
     return crud.get_bookings_by_email(db, email)
 
+@app.get("/api/admin/bookings", response_model=List[schemas.BookingOut])
+def read_all_bookings(db: Session = Depends(get_db), _=Depends(verify_admin_key)):
+    return crud.get_all_bookings(db)
 
 @app.put("/api/bookings/{booking_id}", response_model=schemas.BookingOut)
 def update_booking(booking_id: int, updates: schemas.BookingUpdate, db: Session = Depends(get_db)):
